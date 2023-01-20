@@ -61,20 +61,83 @@
 })(jQuery); // End of use strict
 const quantity = document.getElementById("quantity");
 const inputQuantity = document.getElementById("inputQuantity");
-quantity.addEventListener("change", (event) => {
-  if (event.currentTarget.checked) {
-    inputQuantity.removeAttribute("disabled");
-  } else {
-    inputQuantity.setAttribute("disabled");
-  }
-});
+if (quantity) {
+  quantity.addEventListener("change", (event) => {
+    if (event.currentTarget.checked) {
+      inputQuantity.removeAttribute("disabled");
+    } else {
+      inputQuantity.setAttribute("disabled");
+    }
+  });
+}
 
 const component = document.getElementById("component");
 const inputComponent = document.getElementById("inputComponent");
-component.addEventListener("change", (event) => {
-  if (event.currentTarget.checked) {
-    inputComponent.removeAttribute("disabled");
-  } else {
-    inputComponent.setAttribute("disabled");
+if (component) {
+  component.addEventListener("change", (event) => {
+    if (event.currentTarget.checked) {
+      inputComponent.removeAttribute("disabled");
+    } else {
+      inputComponent.setAttribute("disabled");
+    }
+  });
+}
+
+function table(...td) {
+  let tableData = `<tr>
+  <td>${td[0]}</td>
+  <td>${td[1]}</td>
+  <td > 
+    <select class='department' style="width: 100%; padding: 5px; color: #888; border: none; outline: none; cursor: pointer">
+    <option>${td[2]}</option>
+    </select>
+  </td>
+  <td>${td[3]}</td>
+  <td>${td[4]}</td>
+  <td>${td[5]}</td>
+<td style="display: flex; justify-content: space-around">
+  <a href="#"><i class="fas fa-pen" style="color: green"></i></a>
+  <a href="#"><i class="fas fa-eye" style="color: blue"></i></a>
+  <a href="#"><i class="fas fa-trash" style="color: red"></i></a>
+</td>
+</tr>`;
+  return tableData;
+}
+function option(data) {
+  const option = `<option>${data}</option>`;
+  return option;
+}
+const assets = [
+  {
+    id: 1,
+    name: "asset1",
+    department: ["dept1"],
+    category: "cat1",
+    quality: 2,
+    component: 5,
+  },
+  {
+    id: 1,
+    name: "asset2",
+    department: ["dept1", "dept2"],
+    category: "cat1",
+    quality: 2,
+    component: 5,
+  },
+  {
+    id: 1,
+    name: "asset3",
+    department: ["dept1", "dept2"],
+    category: "cat1",
+    quality: 2,
+    component: 5,
+  },
+];
+
+const assetData = document.getElementById("asset-data");
+
+if (assetData) {
+  for (let i = 0; i < assets.length; i++) {
+    assetData.insertAdjacentHTML("beforeend", table(assets[i].id, assets[i].name, assets[i].department, assets[i].category, assets[i].quality, assets[i].component));
   }
-});
+}
